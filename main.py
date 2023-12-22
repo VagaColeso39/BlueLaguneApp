@@ -18,7 +18,7 @@ class Base(App):
         super().__init__()
         self.box = RelativeLayout()
 
-        self.button = Button(text="123", size=(50, 50), pos=(50, 50))
+        self.button = Button(text="123", size_hint=(0.2, 0.2), pos=(50, 50))
         self.button.bind(on_press=self.resize)
         self.background = Image(source='background.png', fit_mode='cover')
         self.box.add_widget(self.background)
@@ -29,11 +29,12 @@ class Base(App):
         self.map_buttons = []
         #self.create_map_buttons({"107": [(0.1, 0.2), "green"], "100": [(0.1, 0.2), "red"]})
 
-    def resize(self, button):
-        self.box._set_scale(0.5)
 
-    def build(self):
-        return self.box
+    def resize(self, button):
+        
+
+
+
 
     def create_map_buttons(self, json_map:dict):
         a = 0
