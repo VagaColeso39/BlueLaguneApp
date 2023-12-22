@@ -5,19 +5,28 @@ from kivy.core.image import Image
 from kivy.uix.button import Button
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.scatterlayout import ScatterLayout
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.properties import StringProperty
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.image import Image
-Window.size = (1000, 600)
+Window.size = (1920, 1200)
 
 class Base(App):
     def __init__(self):
         super().__init__()
-        self.button = Button(text="123", size=(50, 50), pos=(50, 50), background_color="green")
+<<<<<<< HEAD
+        self.button = Button(text="123", size_hint=(0.05, 0.05), pos=(50, 50), background_color="green")
         self.box = FloatLayout()
+        self.background = Image(source='background.png', size_hint=(1,1), fit_mode='cover')
+=======
+        self.box = ScatterLayout()
+
+        self.button = Button(text="123", size=(50, 50), pos=(50, 50))
+        self.button.bind(on_press=self.resize)
         self.background = Image(source='background.png', fit_mode='cover')
+>>>>>>> 08b115d859904e1846e45ba229ce991e86d8c501
         self.box.add_widget(self.background)
         self.box.add_widget(self.button)
 
@@ -25,6 +34,14 @@ class Base(App):
 
         self.map_buttons = []
         #self.create_map_buttons({"107": [(0.1, 0.2), "green"], "100": [(0.1, 0.2), "red"]})
+
+    def resize(self, button):
+        button.size = (0.1, 0.1)
+        print(button.size)
+        print(button.texture_size)
+        print(self.background.size)
+        print(Window.size)
+        self.box._set_scale(0.5)
 
     def build(self):
         return self.box
