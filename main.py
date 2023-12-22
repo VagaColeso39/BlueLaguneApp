@@ -47,10 +47,5 @@ class Base(App):
             self.box.add_widget(buttons)
 
 
-
-
-
-
-
 if __name__ == "__main__":
     Base().run()
