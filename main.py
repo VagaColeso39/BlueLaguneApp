@@ -16,17 +16,9 @@ Window.size = (1920, 1200)
 class Base(App):
     def __init__(self):
         super().__init__()
-<<<<<<< HEAD
         self.button = Button(text="123", size_hint=(0.05, 0.05), pos=(50, 50), background_color="green")
         self.box = FloatLayout()
         self.background = Image(source='background.png', size_hint=(1,1), fit_mode='cover')
-=======
-        self.box = ScatterLayout()
-
-        self.button = Button(text="123", size=(50, 50), pos=(50, 50))
-        self.button.bind(on_press=self.resize)
-        self.background = Image(source='background.png', fit_mode='cover')
->>>>>>> 08b115d859904e1846e45ba229ce991e86d8c501
         self.box.add_widget(self.background)
         self.box.add_widget(self.button)
 
