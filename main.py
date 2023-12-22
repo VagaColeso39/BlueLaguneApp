@@ -16,7 +16,7 @@ Window.size = (1000, 600)
 class Base(App):
     def __init__(self):
         super().__init__()
-        self.box = ScatterLayout()
+        self.box = RelativeLayout()
 
         self.button = Button(text="123", size=(50, 50), pos=(50, 50))
         self.button.bind(on_press=self.resize)
@@ -30,11 +30,6 @@ class Base(App):
         #self.create_map_buttons({"107": [(0.1, 0.2), "green"], "100": [(0.1, 0.2), "red"]})
 
     def resize(self, button):
-        button.size = (0.1, 0.1)
-        print(button.size)
-        print(button.texture_size)
-        print(self.background.size)
-        print(Window.size)
         self.box._set_scale(0.5)
 
     def build(self):
@@ -47,11 +42,6 @@ class Base(App):
             a += 1
         for buttons in self.map_buttons:
             self.box.add_widget(buttons)
-
-
-
-
-
 
 
 if __name__ == "__main__":
