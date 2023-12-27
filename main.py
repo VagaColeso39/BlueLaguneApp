@@ -85,6 +85,8 @@ class Base(App):
         print(Window.size)
         self.box._set_scale(0.5)
 
+    def build(self):
+        return self.box
 
     def create_map_buttons(self, json_map:dict):
         a = 0
