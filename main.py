@@ -12,20 +12,32 @@ from kivy.uix.textinput import TextInput
 from kivy.properties import StringProperty
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.image import Image
-Window.size = (1920, 1200)
+Window.size = (1920, 1080)
 
 
 # Данную часть кода я для примера взял из интернета, так что на всякий случай оставлю оригинальные комменрарии.
-# В данном комите не реализована механика получения jsona кнопок, пока только заранее прописаные.
+# В данном комите астично реализована механика получения jsona кнопок.
 class DraggableImage(Image):
    # Override the on_touch_down method to detect when the user touches the widget
    def on_touch_down(self, touch):
-      if self.collide_point(*touch.pos):
-         # If the touch event occurred within the widget's bounds, handle the touch event
-         # by setting the widget as the current touch target
-         touch.grab(self)
-         return True
-      return super().on_touch_down(touch)
+
+       if touch.is_mouse_scrolling:
+           if touch.button == 'scrolldown':
+               print('down')
+               print(self.size_hint)
+               if self.size_hint[0] > 0.11:
+                   self.size_hint = (self.size_hint[0] - 0.1, self.size_hint[1] - 0.1)
+           elif touch.button == 'scrollup':
+               print('up')
+               self.size_hint = (self.size_hint[0] + 0.1, self.size_hint[1] + 0.1)
+       Image.on_touch_down(self, touch)
+
+       if self.collide_point(*touch.pos):
+           # If the touch event occurred within the widget's bounds, handle the touch event
+           # by setting the widget as the current touch target
+           touch.grab(self)
+           return True
+       return super().on_touch_down(touch)
 
    # Override the on_touch_move method to track the movement of the user's finger
    def on_touch_move(self, touch):
@@ -50,10 +62,10 @@ class Base(App):
                                                 "13:00":  {"group":  "636-01", "lecturer":  "Иванов И.И", "length":  180,"subject":  "math",
                                                 "17:00":  {"group":  "636", "lecturer":  "Александров А.А.", "length":  90,"subject":  "english"},
                                                 "19:00":  {"group":  "701", "lecturer":  "Петров П.И.", "length":  90,"subject":  "history"}}}},
-"108": {"pos": (100, 100), "type":  "coworking", "items":  ["board", "projector"], "currently_here": 4}}
+"108": {"pos": (483, 947), "type":  "coworking", "items":  ["board", "projector"], "currently_here": 4}}
         self.button = [Button(text="123", size_hint=(0.05, 0.05), pos=(50, 50), background_color="green"), Button(text="456", size_hint=(0.05, 0.05), pos=(100, 100), background_color="red")]
-        self.box = FloatLayout()
-        self.background = DraggableImage(source='background.png', fit_mode='cover')
+        self.box = FloatLayout(pos=(100,300))
+        self.background = DraggableImage(source='background.png', fit_mode='contain')  # заменил cover на contain
         self.box.add_widget(self.background)
         self.buttons_base_state = []
         need_to_replace = 0
